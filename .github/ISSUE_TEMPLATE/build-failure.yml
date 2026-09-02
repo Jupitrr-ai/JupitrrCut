@@ -1,0 +1,34 @@
+name: Build failure
+description: The app doesn't build from source
+labels: ["build"]
+body:
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Android
+        - iOS
+    validations:
+      required: true
+  - type: input
+    id: command
+    attributes:
+      label: Exact command you ran
+      placeholder: e.g. bun run start, ./gradlew assembleDebug
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Bun/Node version, Xcode or Android Studio version, device or simulator.
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: Full error output
+      render: shell
+    validations:
+      required: true

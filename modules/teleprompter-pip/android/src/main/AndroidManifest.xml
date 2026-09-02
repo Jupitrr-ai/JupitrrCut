@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <application>
+    <activity
+      android:name=".TeleprompterPipActivity"
+      android:exported="false"
+      android:launchMode="singleTask"
+      android:resizeableActivity="true"
+      android:supportsPictureInPicture="true"
+      android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+      android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|screenLayout|uiMode">
+    </activity>
+  </application>
+</manifest>

@@ -1,0 +1,22 @@
+plugins {
+  id 'com.android.library'
+  id 'kotlin-android'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'com.jupitrr.teleprompterpip'
+version = '1.0.0'
+
+android {
+  namespace "expo.modules.teleprompterpip"
+  defaultConfig {
+    minSdkVersion 24
+    targetSdkVersion 36
+    versionCode 1
+    versionName '1.0.0'
+  }
+}
+
+dependencies {
+  implementation project(':expo-modules-core')
+}

@@ -1,0 +1,24 @@
+{
+  "androidPackage": "com.jupitrr.aiteleprompter",
+  "environments": {
+    "dev": {
+      "label": "jpt-dev-bd5c3",
+      "envFile": ".env.development",
+      "plist": "GoogleService-Info.dev.plist",
+      "googleServicesJson": "config/firebase/google-services.dev.json",
+      "easEnvironment": "development"
+    },
+    "prod": {
+      "label": "jpt-prod",
+      "envFile": ".env.production",
+      "plist": "GoogleService-Info.prod.plist",
+      "googleServicesJson": "config/firebase/google-services.prod.json",
+      "easEnvironment": "production"
+    }
+  },
+  "easEnvironmentToTarget": {
+    "development": "dev",
+    "preview": "prod",
+    "production": "prod"
+  }
+}
