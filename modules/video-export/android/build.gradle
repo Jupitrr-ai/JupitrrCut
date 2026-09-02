@@ -1,0 +1,53 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'com.jupitrr.videoexport'
+version = '1.0.0'
+
+android {
+  namespace "expo.modules.videoexport"
+  defaultConfig {
+    versionCode 1
+    versionName '1.0.0'
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  }
+}
+
+dependencies {
+  // Media3 Transformer + Effect: GPU-accelerated video transcoding pipeline.
+  // Used by performBeautify to apply a face-masked smoothing pass in a stable,
+  // well-tested encoder/decoder pipeline (no manual MediaCodec/OpenGL plumbing).
+  //
+  // IMPORTANT: keep this in lock-step with expo-video's androidxMedia3Version
+  // (node_modules/expo-video/android/build.gradle). Mismatched Media3 versions
+  // crash at runtime because expo-video's VideoPlayerLoadControl is compiled
+  // against a specific LoadControl ABI — a newer abstract LoadControl method
+  // raises AbstractMethodError as soon as a video tries to play.
+  def media3Version = '1.8.0'
+  implementation "androidx.media3:media3-transformer:${media3Version}"
+  implementation "androidx.media3:media3-effect:${media3Version}"
+  implementation "androidx.media3:media3-common:${media3Version}"
+
+  // ML Kit face detection: drives the pre-pass that locates faces + eye/mouth landmarks,
+  // which our custom GL shader uses to mask the blur to skin only (matches iOS Vision).
+  // 16.1.x is bundled (offline-capable), ~3 MB APK overhead.
+  implementation 'com.google.mlkit:face-detection:16.1.7'
+
+  androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+  androidTestImplementation 'androidx.test:runner:1.5.2'
+}
+
+// Belt-and-suspenders: force-resolve every Media3 artifact (including transitive ones
+// reached via media3-session / media3-exoplayer pulled by expo-video) to the same
+// version. Any later dep that asks for a newer Media3 would otherwise drag everything
+// up and re-introduce the AbstractMethodError crash.
+configurations.configureEach {
+  resolutionStrategy.eachDependency { details ->
+    if (details.requested.group == 'androidx.media3') {
+      details.useVersion('1.8.0')
+      details.because 'Pinned to match expo-video Media3 version'
+    }
+  }
+}

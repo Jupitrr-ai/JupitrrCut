@@ -1,0 +1,73 @@
+# Dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+outputs/
+web-build/
+
+# Native build output
+android/build/
+android/app/build/
+android/.gradle/
+ios/build/
+ios/Pods/
+ios/DerivedData/
+*.orig.*
+
+# Signing keys — never commit
+*.jks
+*.keystore
+key.properties
+local.properties
+*.p8
+*.p12
+*.mobileprovision
+AuthKey_*.p8
+
+# Service account / server credentials — never commit
+*service-account*.json
+google-services-account.json
+play-service-account*.json
+
+# Firebase client config — install-specific, not shipped in git
+google-services.json
+google-services.*.json
+GoogleService-Info.plist
+GoogleService-Info.*.plist
+ios/JupitrrCut/GoogleService-Info.plist
+
+# Env files — copy .env.example instead
+.env
+.env.*
+!.env.example
+
+# Metro
+.metro-health-check*
+
+# Debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# TypeScript
+*.tsbuildinfo
+
+# Testing
+coverage/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# EAS
+.eas/
+
+expo-env.d.ts
